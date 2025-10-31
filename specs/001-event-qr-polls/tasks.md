@@ -67,4 +67,4 @@ MVP first: deliver US1 (participation via QR) using mock data. Then implement ad
 
 ---
 
-*Tasks generated from plan.md and spec.md. Each task includes an exact path to file(s) to be created or edited.*
+_Tasks generated from plan.md and spec.md. Each task includes an exact path to file(s) to be created or edited._

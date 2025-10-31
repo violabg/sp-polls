@@ -1,36 +1,132 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Event QR Polls
 
-## Getting Started
+A Next.js application for hosting event Q&A sessions with AI-generated questions, QR code access, and real-time answer aggregation.
 
-First, run the development server:
+## Features
+
+- **Admin Dashboard** - Create events and generate AI-powered questions
+- **Public Participation** - Scan QR codes to access events and submit answers
+- **Real-time Aggregation** - View instant statistics on responses
+- **Server-side Scoring** - Prevent client-side answer manipulation
+- **Rate Limiting** - Protect against abuse
+- **CSV Export** - Download anonymized or detailed response data
+
+## Technology Stack
+
+- **Frontend**: Next.js 16 (App Router), React 19, TailwindCSS 4
+- **Backend**: Next.js Server Actions and Route Handlers
+- **Storage**: Supabase PostgreSQL (production) / Mock JSON (development)
+- **Auth**: Supabase Auth (production) / Mock (development)
+- **Testing**: Jest, React Testing Library, Playwright
+- **Hosting**: Vercel (recommended)
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js 18+
+- pnpm 10+
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Using Mock Data
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+By default, the app uses mock JSON files for local development. No database setup required.
 
-## Learn More
+See [docs/quickstart.md](./docs/quickstart.md) for detailed setup instructions.
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```text
+├── app/
+│   ├── (public)/e/[eventId]/         # Public event pages
+│   ├── (admin)/events/               # Admin dashboard
+│   ├── api/                          # API routes
+│   └── layout.tsx
+├── lib/
+│   ├── types.ts                      # TypeScript interfaces
+│   ├── mock-data.ts                  # Data access layer
+│   ├── auth.ts                       # Authentication
+│   ├── ai-audit.ts                   # AI logging
+│   └── rate-limit.ts                 # Rate limiting
+├── tests/
+│   ├── contract/                     # API contract tests
+│   ├── integration/                  # Integration tests
+│   └── e2e/                          # End-to-end tests
+├── docs/
+│   ├── quickstart.md                 # Setup guide
+│   └── constraints.md                # Database constraints
+└── mock/
+    ├── events.json                   # Sample events
+    ├── questions.json                # Sample questions
+    ├── users.json                    # Sample users
+    ├── answers.json                  # Sample answers
+    └── ai_audit.json                 # Sample audit logs
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Available Scripts
 
-## Deploy on Vercel
+```bash
+# Development
+pnpm dev
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Build for production
+pnpm build
+pnpm start
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Linting
+pnpm lint
+
+# Testing
+pnpm test
+pnpm test:watch
+pnpm test:e2e
+
+# Environment validation
+node scripts/validate-env.ts
+```
+
+## Security Features
+
+- ✅ Server-side answer scoring
+- ✅ `correct_choice` never exposed to clients
+- ✅ Admin route protection
+- ✅ Rate limiting on sensitive endpoints
+- ✅ Audit logging for AI operations
+- ✅ Environment variable validation
+
+## Documentation
+
+- [Quick Start Guide](./docs/quickstart.md) - Setup and usage
+- [Database Constraints](./docs/constraints.md) - Schema and RLS policies
+- [API Specification](./specs/001-event-qr-polls/spec.md) - Feature requirements
+
+## Roadmap
+
+- [ ] Supabase PostgreSQL integration
+- [ ] Real AI question generation (Claude/GPT-4)
+- [ ] Advanced admin analytics
+- [ ] Live event moderation
+- [ ] Mobile app
+
+## Contributing
+
+1. Create a feature branch: `git checkout -b 001-event-qr-polls`
+2. Make your changes and commit
+3. Push to the branch
+4. Open a Pull Request
+
+## License
+
+This project is proprietary software for Spindox.
+
+## Contact
+
+For questions or support, contact the development team.

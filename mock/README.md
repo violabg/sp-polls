@@ -4,6 +4,7 @@ This folder contains mock JSON data to develop and test the `Event QR Polls` fea
 connecting to Supabase.
 
 Files:
+
 - `events.json` — sample events
 - `questions.json` — sample questions (note: `correct_choice` intentionally omitted from these
   public payloads; use server-only storage in production)
@@ -12,6 +13,7 @@ Files:
 - `ai_audit.json` — sample AI generation audit entries (prompt, model, response_hash)
 
 Usage:
+
 - Developers can fetch these files directly during local development in server handlers.
 - Replace with DB-backed storage when wiring Supabase in later phases.
 
