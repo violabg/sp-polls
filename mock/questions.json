@@ -1,0 +1,28 @@
+[
+  {
+    "id": "q-001",
+    "event_id": "event-001",
+    "text": "Which Spindox practice improves developer velocity?",
+    "choices": [
+      { "id": "c1", "text": "Extensive process documentation" },
+      { "id": "c2", "text": "Automated testing and CI" },
+      { "id": "c3", "text": "Manual deployments" },
+      { "id": "c4", "text": "Ad-hoc migrations" }
+    ],
+    "generated_by_ai": true,
+    "created_at": "2025-10-31T09:05:00Z"
+  },
+  {
+    "id": "q-002",
+    "event_id": "event-001",
+    "text": "What is the recommended way to protect server secrets?",
+    "choices": [
+      { "id": "c1", "text": "Embed in client code" },
+      { "id": "c2", "text": "Store in server-only env vars" },
+      { "id": "c3", "text": "Hard-code in source" },
+      { "id": "c4", "text": "Log to public endpoints" }
+    ],
+    "generated_by_ai": true,
+    "created_at": "2025-10-31T09:06:00Z"
+  }
+]
