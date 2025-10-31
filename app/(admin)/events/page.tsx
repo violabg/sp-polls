@@ -45,7 +45,7 @@ export default async function AdminEventsPage() {
           {events.map((event) => (
             <Link
               key={event.id}
-              href={`/admin/events/${event.id}`}
+              href={`/events/${event.id}`}
               className="block rounded-lg border border-gray-200 bg-white p-4 hover:border-blue-400 hover:shadow-md"
             >
               <h2 className="text-xl font-semibold text-gray-900">

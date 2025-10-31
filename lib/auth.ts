@@ -24,7 +24,7 @@ export async function getCurrentUser(): Promise<AuthUser | null> {
     id: "user-001",
     email: "user@example.com",
     name: "Test User",
-    role: "user",
+    role: "admin",
   };
 }
 

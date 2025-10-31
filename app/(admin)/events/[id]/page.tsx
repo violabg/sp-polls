@@ -12,10 +12,11 @@ export default async function AdminEventDetailPage({
 }: {
   params: { id: string };
 }) {
+  const { id } = await params;
   const [adminCheck, event, questions] = await Promise.all([
     isAdmin(),
-    getEventById(params.id),
-    getQuestionsByEventIdWithCorrectChoice(params.id),
+    getEventById(id),
+    getQuestionsByEventIdWithCorrectChoice(id),
   ]);
 
   if (!adminCheck) {
@@ -47,7 +48,7 @@ export default async function AdminEventDetailPage({
   return (
     <div className="container mx-auto py-8">
       {/* Back Link */}
-      <Link href="/admin/events" className="text-blue-600 hover:text-blue-800">
+      <Link href="/events" className="text-blue-600 hover:text-blue-800">
         &larr; Back to Events
       </Link>
 
