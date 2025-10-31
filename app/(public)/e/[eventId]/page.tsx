@@ -10,9 +10,10 @@ export default async function EventPage({
 }: {
   params: { eventId: string };
 }) {
+  const { eventId } = await params;
   const [event, questions, user] = await Promise.all([
-    getEventById(params.eventId),
-    getQuestionsByEventId(params.eventId),
+    getEventById(eventId),
+    getQuestionsByEventId(eventId),
     getCurrentUser(),
   ]);
 

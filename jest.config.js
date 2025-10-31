@@ -10,7 +10,10 @@ const customJestConfig = {
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/$1",
   },
-  testMatch: ["**/tests/**/*.spec.ts", "**/tests/**/*.spec.tsx"],
+  testMatch: [
+    "**/tests/contract/**/*.spec.ts",
+    "**/tests/integration/**/*.spec.ts",
+  ],
   collectCoverageFrom: [
     "app/**/*.{js,jsx,ts,tsx}",
     "lib/**/*.{js,jsx,ts,tsx}",
