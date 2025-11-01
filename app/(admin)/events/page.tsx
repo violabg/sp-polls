@@ -1,14 +1,7 @@
 "use server";
 
-import { Badge } from "@/components/ui/badge";
+import AdminEventCard from "@/components/admin-event-card";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { isAdmin } from "@/lib/auth";
 import { getAllEvents } from "@/lib/mock-data";
 import Link from "next/link";
@@ -50,26 +43,7 @@ export default async function AdminEventsPage() {
         <div className="space-y-4">
           {events.map((event) => (
             <Link key={event.id} href={`/events/${event.id}`}>
-              <Card className="mt-6 mb-8">
-                <CardHeader>
-                  <CardTitle className="text-2xl">{event.title}</CardTitle>
-                  <CardDescription>
-                    Created: {new Date(event.created_at).toLocaleDateString()}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="mt-2text-md">{event.description}</p>
-                  <Badge
-                    className={`mt-2 ${
-                      event.status === "published"
-                        ? "bg-green-100 text-green-800"
-                        : "bg-yellow-100 text-yellow-800"
-                    }`}
-                  >
-                    {event.status}
-                  </Badge>
-                </CardContent>
-              </Card>
+              <AdminEventCard event={event} />
             </Link>
           ))}
         </div>
