@@ -27,6 +27,7 @@ export default async function AdminEventDetailPage({
     getEventById(id),
     getQuestionsByEventIdWithCorrectChoice(id),
   ]);
+  console.log("🚀 ~ AdminEventDetailPage ~ questions:", questions);
 
   if (!adminCheck) {
     return (

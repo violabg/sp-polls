@@ -9,6 +9,7 @@
       { "id": "c3", "text": "Manual deployments" },
       { "id": "c4", "text": "Ad-hoc migrations" }
     ],
+    "correct_choice": "c2",
     "generated_by_ai": true,
     "created_at": "2025-10-31T09:05:00Z"
   },
@@ -22,6 +23,7 @@
       { "id": "c3", "text": "Hard-code in source" },
       { "id": "c4", "text": "Log to public endpoints" }
     ],
+    "correct_choice": "c1",
     "generated_by_ai": true,
     "created_at": "2025-10-31T09:06:00Z"
   }
