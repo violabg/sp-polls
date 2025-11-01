@@ -1,5 +1,6 @@
 "use server";
 
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -58,15 +59,15 @@ export default async function AdminEventsPage() {
                 </CardHeader>
                 <CardContent>
                   <p className="mt-2text-md">{event.description}</p>
-                  <span
-                    className={`mt-2 inline-block rounded-full px-3 py-1 text-sm font-medium ${
+                  <Badge
+                    className={`mt-2 ${
                       event.status === "published"
                         ? "bg-green-100 text-green-800"
                         : "bg-yellow-100 text-yellow-800"
                     }`}
                   >
                     {event.status}
-                  </span>
+                  </Badge>
                 </CardContent>
               </Card>
             </Link>
