@@ -1,10 +1,10 @@
 <!--
 Sync Impact Report
-Version change: unspecified/template -> 0.1.0
-Modified principles: (added) Server-side First; Security & Privacy; AI Usage & Auditability; Test-First & Quality Gates; Simplicity & Minimal Data Retention
-Added sections: Operational Constraints; Development Workflow
+Version change: 0.1.0 -> 0.2.0
+Modified principles: (added) Lingua (Italiano obbligatorio)
+Added sections: none
 Removed sections: none
-Templates requiring updates: .specify/templates/plan-template.md ⚠ pending, .specify/templates/spec-template.md ⚠ pending, .specify/templates/tasks-template.md ⚠ pending
+Templates requiring updates: .specify/templates/plan-template.md ✅ updated, .specify/templates/spec-template.md ✅ updated, .specify/templates/tasks-template.md ✅ updated
 Follow-up TODOs: RATIFICATION_DATE (deferred)
 -->
 
@@ -51,6 +51,33 @@ MUST fail the pipeline if any of these gates fail.
 Design choices MUST favour simple, auditable implementations. Avoid premature optimization and
 complex developer ergonomics that increase risk. Persist only necessary fields; define clear
 retention policies. Keep APIs small, explicit, and versioned.
+
+### Lingua (Italiano obbligatorio)
+
+All user-facing text MUST be written and published in Italian (it-IT). This requirement
+applies to: UI labels and controls, error and validation messages shown to end users, all
+public documentation (README, quickstart, specs in `/specs/`), user-facing emails and
+notifications, public templates, marketing copy, and any content delivered to end users.
+
+Rationale: The project operates for Italian-speaking stakeholders and users; mandating a single
+language for end-user content ensures clarity, accessibility, and consistent user experience.
+
+Rules and scope:
+
+- MUST: Translate or author every string that is visible to end users in Italian before
+  release. Generated content (including AI outputs) that will be user-visible MUST be produced
+  in Italian or translated prior to shipping.
+- MUST: Documentation and example flows in `/specs/`, `/docs/`, and `README.md` that are
+  intended for users MUST be in Italian.
+- SHOULD: When feasible, provide an English developer_summary or inline comment explaining
+  non-user-facing rationale, but this is OPTIONAL for internal-only artifacts.
+- MAY: Internal-only developer comments, CI logs, low-level debug output, or code identifiers
+  may remain in English where that improves maintainability. Such internal English MUST NOT be
+  exposed directly to end users without translation.
+
+Enforcement: The Constitution Check in implementation plans and the project's CI/QA checklists
+MUST include a language gate that verifies user-facing strings and public docs are Italian or
+include a task to translate them before release.
 
 ## Operational Constraints
 
@@ -117,4 +144,4 @@ Compliance review expectations:
   gates that are not satisfied. The plan author MUST either address the gates or document
   approved exceptions.
 
-**Version**: 0.1.0 | **Ratified**: TODO(RATIFICATION_DATE): "Date of initial ratification unknown - please set" | **Last Amended**: 2025-10-31
+**Version**: 0.2.0 | **Ratified**: TODO(RATIFICATION_DATE): "Date of initial ratification unknown - please set" | **Last Amended**: 2025-11-01

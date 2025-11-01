@@ -29,9 +29,22 @@
 
 ## Constitution Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+_GATE: Must pass before Phase 0 research. Re-check after Phase 1 design._
 
-[Gates determined based on constitution file]
+The plan author MUST verify the following gates against the project Constitution
+and document any approved exceptions. At minimum include:
+
+- Security & Privacy gate: confirm server-side evaluation, secrets handling, and RLS
+  requirements are satisfied or document mitigation steps.
+- AI & Auditability gate: confirm that any AI-driven content is auditable and that
+  prompts/outputs stored do not expose sensitive evaluation data.
+- Language gate (NEW): All user-facing text, public docs, and any strings that will be
+  visible to end users MUST be authored in Italian (it-IT) or include a tracked task to
+  translate them prior to release. Plans that create user-facing content MUST include the
+  Italian text or a translation task in the deliverables.
+
+If any gate is violated, list the violations, rationale, and remediation tasks in this
+section before Phase 0 completion.
 
 ## Project Structure
 
@@ -48,6 +61,7 @@ specs/[###-feature]/
 ```
 
 ### Source Code (repository root)
+
 <!--
   ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
   for this feature. Delete unused options and expand the chosen structure with
@@ -98,7 +112,7 @@ directories captured above]
 
 > **Fill ONLY if Constitution Check has violations that must be justified**
 
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+| Violation                  | Why Needed         | Simpler Alternative Rejected Because |
+| -------------------------- | ------------------ | ------------------------------------ |
+| [e.g., 4th project]        | [current need]     | [why 3 projects insufficient]        |
+| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient]  |
