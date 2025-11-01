@@ -1,5 +1,6 @@
 "use server";
 
+import { Button } from "@/components/ui/button";
 import { isAdmin } from "@/lib/auth";
 import { getAllEvents } from "@/lib/mock-data";
 import Link from "next/link";
@@ -9,9 +10,9 @@ export default async function AdminEventsPage() {
 
   if (!adminCheck) {
     return (
-      <div className="container mx-auto py-8">
-        <div className="rounded-lg border border-red-200 bg-red-50 p-6 text-center">
-          <h1 className="text-2xl font-bold text-red-900">Access Denied</h1>
+      <div className="mx-auto py-8 container">
+        <div className="bg-red-50 p-6 border border-red-200 rounded-lg text-center">
+          <h1 className="font-bold text-red-900 text-2xl">Access Denied</h1>
           <p className="mt-2 text-red-700">
             You do not have permission to access the admin panel.
           </p>
@@ -23,19 +24,16 @@ export default async function AdminEventsPage() {
   const events = await getAllEvents();
 
   return (
-    <div className="container mx-auto py-8">
-      <div className="mb-8 flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-gray-900">Admin Events</h1>
-        <Link
-          href="/admin/events/new"
-          className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
-        >
-          Create Event
-        </Link>
+    <div className="mx-auto py-8 container">
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="font-bold text-gray-900 text-3xl">Admin Events</h1>
+        <Button asChild>
+          <Link href="/admin/events/new">Create Event</Link>
+        </Button>
       </div>
 
       {events.length === 0 ? (
-        <div className="rounded-lg border border-gray-200 bg-gray-50 p-6 text-center">
+        <div className="bg-gray-50 p-6 border border-gray-200 rounded-lg text-center">
           <p className="text-gray-600">
             No events yet. Create one to get started.
           </p>
@@ -46,13 +44,13 @@ export default async function AdminEventsPage() {
             <Link
               key={event.id}
               href={`/events/${event.id}`}
-              className="block rounded-lg border border-gray-200 bg-white p-4 hover:border-blue-400 hover:shadow-md"
+              className="block bg-white hover:shadow-md p-4 border border-gray-200 hover:border-blue-400 rounded-lg"
             >
-              <h2 className="text-xl font-semibold text-gray-900">
+              <h2 className="font-semibold text-gray-900 text-xl">
                 {event.title}
               </h2>
               <p className="mt-1 text-gray-600">{event.description}</p>
-              <p className="mt-2 text-sm text-gray-500">
+              <p className="mt-2 text-gray-500 text-sm">
                 Created: {new Date(event.created_at).toLocaleDateString()}
               </p>
               <span
