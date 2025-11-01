@@ -66,6 +66,15 @@ To add more mock data, edit these JSON files directly.
 3. Click "Generate Questions" to create 4 AI-generated questions
 4. View individual questions with correct answers marked
 5. Click "View Aggregated Answers" to see statistics
+6. **NEW**: Click "Create Event" to add new events at `/events/new`
+7. **NEW**: Click "Edit Event" on any event to modify at `/events/{id}/edit`
+
+### Mock Login (Development Only)
+
+For testing purposes, the login form includes mock login buttons:
+
+- **Login as Admin**: Redirects to `/events` (admin dashboard)
+- **Login as User**: Redirects to `/e/event-001` (sample event)
 
 ## Testing
 
