@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -15,11 +17,14 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const router = useRouter();
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -91,6 +96,17 @@ export function LoginForm({
               </Field>
             </FieldGroup>
           </form>
+          <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
+            Or use mock login
+          </FieldSeparator>
+          <div className="flex gap-2">
+            <Button onClick={() => router.push("/events")}>
+              Login as Admin
+            </Button>
+            <Button onClick={() => router.push("/e/event-001")}>
+              Login as User
+            </Button>
+          </div>
         </CardContent>
       </Card>
       <FieldDescription className="px-6 text-center">

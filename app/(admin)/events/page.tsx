@@ -28,7 +28,7 @@ export default async function AdminEventsPage() {
       <div className="flex justify-between items-center mb-8">
         <h1 className="font-bold text-gray-900 text-3xl">Admin Events</h1>
         <Button asChild>
-          <Link href="/admin/events/new">Create Event</Link>
+          <Link href="/events/new">Create Event</Link>
         </Button>
       </div>
 
