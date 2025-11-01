@@ -1,6 +1,13 @@
 "use server";
 
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { isAdmin } from "@/lib/auth";
 import { getAllEvents } from "@/lib/mock-data";
 import Link from "next/link";
@@ -41,27 +48,27 @@ export default async function AdminEventsPage() {
       ) : (
         <div className="space-y-4">
           {events.map((event) => (
-            <Link
-              key={event.id}
-              href={`/events/${event.id}`}
-              className="block bg-white hover:shadow-md p-4 border border-gray-200 hover:border-blue-400 rounded-lg"
-            >
-              <h2 className="font-semibold text-gray-900 text-xl">
-                {event.title}
-              </h2>
-              <p className="mt-1 text-gray-600">{event.description}</p>
-              <p className="mt-2 text-gray-500 text-sm">
-                Created: {new Date(event.created_at).toLocaleDateString()}
-              </p>
-              <span
-                className={`mt-2 inline-block rounded-full px-3 py-1 text-sm font-medium ${
-                  event.status === "published"
-                    ? "bg-green-100 text-green-800"
-                    : "bg-yellow-100 text-yellow-800"
-                }`}
-              >
-                {event.status}
-              </span>
+            <Link key={event.id} href={`/events/${event.id}`}>
+              <Card className="mt-6 mb-8">
+                <CardHeader>
+                  <CardTitle className="text-2xl">{event.title}</CardTitle>
+                  <CardDescription>
+                    Created: {new Date(event.created_at).toLocaleDateString()}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="mt-2text-md">{event.description}</p>
+                  <span
+                    className={`mt-2 inline-block rounded-full px-3 py-1 text-sm font-medium ${
+                      event.status === "published"
+                        ? "bg-green-100 text-green-800"
+                        : "bg-yellow-100 text-yellow-800"
+                    }`}
+                  >
+                    {event.status}
+                  </span>
+                </CardContent>
+              </Card>
             </Link>
           ))}
         </div>
