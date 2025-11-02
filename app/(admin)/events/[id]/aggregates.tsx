@@ -23,9 +23,9 @@ export default async function EventAggregatesPage({
 
   if (!adminCheck) {
     return (
-      <div className="container mx-auto py-8">
-        <div className="rounded-lg border border-red-200 bg-red-50 p-6 text-center">
-          <h1 className="text-2xl font-bold text-red-900">Access Denied</h1>
+      <div className="mx-auto py-8 container">
+        <div className="bg-red-50 p-6 border border-red-200 rounded-lg text-center">
+          <h1 className="font-bold text-red-900 text-2xl">Access Denied</h1>
           <p className="mt-2 text-red-700">
             You do not have permission to view aggregates.
           </p>
@@ -36,9 +36,9 @@ export default async function EventAggregatesPage({
 
   if (!event) {
     return (
-      <div className="container mx-auto py-8">
-        <div className="rounded-lg border border-red-200 bg-red-50 p-6 text-center">
-          <h1 className="text-2xl font-bold text-red-900">Event Not Found</h1>
+      <div className="mx-auto py-8 container">
+        <div className="bg-red-50 p-6 border border-red-200 rounded-lg text-center">
+          <h1 className="font-bold text-red-900 text-2xl">Event Not Found</h1>
         </div>
       </div>
     );
@@ -88,26 +88,26 @@ export default async function EventAggregatesPage({
   ).size;
 
   return (
-    <div className="container mx-auto py-8">
+    <div className="mx-auto py-8 container">
       <Link
-        href={`/admin/events/${event.id}`}
+        href={`/events/${event.id}`}
         className="text-blue-600 hover:text-blue-800"
       >
         &larr; Back to Event
       </Link>
 
-      <h1 className="mt-6 text-3xl font-bold text-gray-900">
+      <h1 className="mt-6 font-bold text-gray-900 text-3xl">
         {event.title} - Aggregated Results
       </h1>
 
-      <div className="mb-8 mt-6 grid grid-cols-2 gap-4 rounded-lg border border-gray-200 bg-white p-6">
+      <div className="gap-4 grid grid-cols-2 bg-white mt-6 mb-8 p-6 border border-gray-200 rounded-lg">
         <div>
-          <p className="text-sm text-gray-600">Total Respondents</p>
-          <p className="text-3xl font-bold text-gray-900">{totalRespondents}</p>
+          <p className="text-gray-600 text-sm">Total Respondents</p>
+          <p className="font-bold text-gray-900 text-3xl">{totalRespondents}</p>
         </div>
         <div>
-          <p className="text-sm text-gray-600">Total Questions</p>
-          <p className="text-3xl font-bold text-gray-900">{questions.length}</p>
+          <p className="text-gray-600 text-sm">Total Questions</p>
+          <p className="font-bold text-gray-900 text-3xl">{questions.length}</p>
         </div>
       </div>
 
@@ -115,28 +115,28 @@ export default async function EventAggregatesPage({
         {stats.map((stat, idx) => (
           <div
             key={stat.question_id}
-            className="rounded-lg border border-gray-200 bg-white p-6"
+            className="bg-white p-6 border border-gray-200 rounded-lg"
           >
-            <h2 className="mb-4 text-xl font-semibold text-gray-900">
+            <h2 className="mb-4 font-semibold text-gray-900 text-xl">
               {idx + 1}. {stat.question_text}
             </h2>
 
-            <div className="mb-6 grid grid-cols-3 gap-4">
-              <div className="rounded-lg bg-blue-50 p-4">
-                <p className="text-sm text-gray-600">Total Answers</p>
-                <p className="text-2xl font-bold text-blue-600">
+            <div className="gap-4 grid grid-cols-3 mb-6">
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <p className="text-gray-600 text-sm">Total Answers</p>
+                <p className="font-bold text-blue-600 text-2xl">
                   {stat.total_answers}
                 </p>
               </div>
-              <div className="rounded-lg bg-green-50 p-4">
-                <p className="text-sm text-gray-600">Correct</p>
-                <p className="text-2xl font-bold text-green-600">
+              <div className="bg-green-50 p-4 rounded-lg">
+                <p className="text-gray-600 text-sm">Correct</p>
+                <p className="font-bold text-green-600 text-2xl">
                   {stat.correct_answers}
                 </p>
               </div>
-              <div className="rounded-lg bg-purple-50 p-4">
-                <p className="text-sm text-gray-600">Success Rate</p>
-                <p className="text-2xl font-bold text-purple-600">
+              <div className="bg-purple-50 p-4 rounded-lg">
+                <p className="text-gray-600 text-sm">Success Rate</p>
+                <p className="font-bold text-purple-600 text-2xl">
                   {stat.percentage_correct}%
                 </p>
               </div>
@@ -150,9 +150,9 @@ export default async function EventAggregatesPage({
                 <div key={choice.choice_id} className="flex items-center">
                   <div className="flex-1">
                     <p className="text-gray-700">{choice.choice_text}</p>
-                    <div className="mt-1 h-2 overflow-hidden rounded-full bg-gray-200">
+                    <div className="bg-gray-200 mt-1 rounded-full h-2 overflow-hidden">
                       <div
-                        className="h-full bg-blue-500"
+                        className="bg-blue-500 h-full"
                         style={{ width: `${choice.percentage}%` }}
                       />
                     </div>
@@ -161,7 +161,7 @@ export default async function EventAggregatesPage({
                     <p className="font-semibold text-gray-900">
                       {choice.count}
                     </p>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-gray-600 text-sm">
                       {choice.percentage}%
                     </p>
                   </div>
@@ -172,11 +172,11 @@ export default async function EventAggregatesPage({
         ))}
       </div>
 
-      <div className="mt-8 rounded-lg border border-gray-200 bg-white p-6">
+      <div className="bg-white mt-8 p-6 border border-gray-200 rounded-lg">
         <h2 className="mb-4 font-semibold text-gray-900">Export Options</h2>
         <a
           href={`/api/events/${event.id}/answers?format=csv`}
-          className="inline-block rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+          className="inline-block bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md text-white"
         >
           Download CSV (Anonymized)
         </a>

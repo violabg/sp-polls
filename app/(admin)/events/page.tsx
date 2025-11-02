@@ -13,9 +13,9 @@ export default async function AdminEventsPage() {
     return (
       <div className="mx-auto py-8 container">
         <div className="bg-red-50 p-6 border border-red-200 rounded-lg text-center">
-          <h1 className="font-bold text-red-900 text-2xl">Access Denied</h1>
+          <h1 className="font-bold text-red-900 text-2xl">Accesso Negato</h1>
           <p className="mt-2 text-red-700">
-            You do not have permission to access the admin panel.
+            Non hai il permesso di accedere al pannello amministratore.
           </p>
         </div>
       </div>
@@ -27,16 +27,18 @@ export default async function AdminEventsPage() {
   return (
     <div className="mx-auto py-8 container">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="font-bold text-gray-900 text-3xl">Admin Events</h1>
+        <h1 className="font-bold text-gray-900 text-3xl">
+          Eventi Amministrazione
+        </h1>
         <Button asChild>
-          <Link href="/events/new">Create Event</Link>
+          <Link href="/events/new">Crea Evento</Link>
         </Button>
       </div>
 
       {events.length === 0 ? (
         <div className="bg-gray-50 p-6 border border-gray-200 rounded-lg text-center">
           <p className="text-gray-600">
-            No events yet. Create one to get started.
+            Nessun evento ancora. Creane uno per iniziare.
           </p>
         </div>
       ) : (

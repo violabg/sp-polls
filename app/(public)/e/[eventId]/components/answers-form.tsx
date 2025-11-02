@@ -7,8 +7,10 @@ import {
   FieldError,
   FieldLabel,
 } from "@/components/ui/field";
+import { FormSpinner } from "@/components/ui/form-spinner";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Spinner } from "@/components/ui/spinner";
+import { submitAnswer } from "@/lib/actions/submit-answer";
+import { useFormAction } from "@/lib/hooks/use-form-action";
 import type { Question } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMemo } from "react";
@@ -34,44 +36,56 @@ export function AnswersForm({ questions, userId, onSubmit }: AnswersFormProps) {
   // Use a stable TypeScript type for form values: a map questionId -> choiceId
   type FormValues = Record<string, string>;
 
+  const { state, formAction, isPending } = useFormAction(submitAnswer);
+  const typedState = state as Record<string, unknown> | undefined;
+
   const {
     handleSubmit,
     control,
-    formState: { isSubmitting, errors },
+    reset,
+    formState: { errors },
     // zodResolver typing is difficult with dynamic schemas; relax here intentionally
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } = useForm<FormValues>({ resolver: zodResolver(schema) as unknown as any });
 
   const submitAnswers = async (values: FormValues) => {
-    try {
-      // Submit each answer
-      for (const [questionId, choiceId] of Object.entries(values)) {
-        const response = await fetch(`/api/questions/${questionId}/answers`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            question_id: questionId,
-            selected_choice: choiceId,
-            user_id: userId,
-          }),
-        });
+    const formData = new FormData();
+    for (const [questionId, choiceId] of Object.entries(values)) {
+      formData.append(
+        "answers",
+        JSON.stringify({
+          question_id: questionId,
+          selected_choice: choiceId,
+          user_id: userId,
+        })
+      );
+    }
 
-        if (!response.ok) {
-          throw new Error(`Failed to submit answer for question ${questionId}`);
-        }
-      }
+    await formAction(formData);
 
-      // cast to expected external type
-      onSubmit?.(values as Record<string, string>);
-      alert("Risposte inviate con successo!");
-    } catch (error) {
-      console.error("Error submitting answers:", error);
-      alert("Invio fallito. Riprova più tardi.");
+    // If the action set success state, call onSubmit and reset
+    if (typedState?.success) {
+      onSubmit?.(values);
+      reset();
     }
   };
 
   return (
-    <form onSubmit={handleSubmit(submitAnswers)} className="space-y-6">
+    <form
+      onSubmit={handleSubmit(submitAnswers)}
+      className="space-y-6"
+      aria-busy={isPending}
+    >
+      {typedState?.error ? (
+        <div className="bg-red-100 p-3 border border-red-200 rounded text-red-700 text-sm">
+          {String(typedState.error)}
+        </div>
+      ) : null}
+      {typedState?.success ? (
+        <div className="bg-green-100 p-3 border border-green-200 rounded text-green-700 text-sm">
+          Risposte inviate con successo!
+        </div>
+      ) : null}
       {questions.map((question) => (
         <Field
           key={question.id}
@@ -85,14 +99,16 @@ export function AnswersForm({ questions, userId, onSubmit }: AnswersFormProps) {
               render={({ field }) => (
                 <>
                   <RadioGroup
-                    onValueChange={(val) => field.onChange(val)}
+                    onValueChange={(val) => !isPending && field.onChange(val)}
                     value={field.value as string | undefined}
+                    disabled={isPending}
                   >
                     {question.choices.map((choice) => (
                       <Field key={choice.id} orientation="horizontal">
                         <RadioGroupItem
                           value={String(choice.id)}
                           id={`${question.id}-${choice.id}`}
+                          disabled={isPending}
                         />
                         <FieldLabel
                           className="font-normal"
@@ -120,9 +136,9 @@ export function AnswersForm({ questions, userId, onSubmit }: AnswersFormProps) {
         </Field>
       ))}
 
-      <Button type="submit" disabled={isSubmitting}>
-        {isSubmitting && <Spinner />}{" "}
-        {isSubmitting ? "Invio..." : "Invia Risposte"}
+      <Button type="submit" disabled={isPending}>
+        {isPending && <FormSpinner isPending size="sm" label="" />}
+        {isPending ? "Invio..." : "Invia Risposte"}
       </Button>
     </form>
   );

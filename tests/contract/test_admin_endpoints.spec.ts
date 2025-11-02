@@ -29,8 +29,8 @@ describe("Admin Endpoint Security", () => {
   });
 
   test("admin events list should be accessible only to admins", async () => {
-    // TODO: Test /admin/events route
-    // const response = await fetch('/admin/events')
+    // TODO: Test /events route
+    // const response = await fetch('/events')
     // For admin: response.status should be 200
     // For user: response should redirect or return 403
     expect(true).toBe(true);

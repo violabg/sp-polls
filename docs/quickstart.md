@@ -61,7 +61,7 @@ To add more mock data, edit these JSON files directly.
 
 ### As an Admin
 
-1. Visit `/admin/events` to see all events
+1. Visit `/events` to see all events
 2. Click an event to view its details
 3. Click "Generate Questions" to create 4 AI-generated questions
 4. View individual questions with correct answers marked
@@ -100,9 +100,9 @@ pnpm test:e2e
 
 ### Admin Endpoints
 
-- `GET /admin/events` - List all events
-- `GET /admin/events/[id]` - Event detail with questions
-- `GET /admin/events/[id]/aggregates` - Aggregated answer statistics
+- `GET /events` - List all events
+- `GET /events/[id]` - Event detail with questions
+- `GET /events/[id]/aggregates` - Aggregated answer statistics
 - `POST /api/events/[id]/generate-questions` - Generate AI questions (rate limited)
 - `GET /api/events/[id]/answers` - Export answers as CSV
 

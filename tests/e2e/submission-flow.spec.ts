@@ -48,7 +48,7 @@ test.describe("Admin Pages E2E", () => {
 
   test("should gracefully handle admin page access", async ({ page }) => {
     // Navigate to admin page (may show access denied without proper auth)
-    await page.goto("/admin/events");
+    await page.goto("/events");
 
     // Page should load - either showing admin content or access denied
     const content = page.locator("body");

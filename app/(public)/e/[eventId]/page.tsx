@@ -28,9 +28,11 @@ export default async function EventPage({
     return (
       <div className="mx-auto py-8 container">
         <div className="bg-red-50 p-6 border border-red-200 rounded-lg text-center">
-          <h1 className="font-bold text-red-900 text-2xl">Event Not Found</h1>
+          <h1 className="font-bold text-red-900 text-2xl">
+            Evento Non Trovato
+          </h1>
           <p className="mt-2 text-red-700">
-            The event you&apos;re looking for doesn&apos;t exist.
+            L&apos;evento che stai cercando non esiste.
           </p>
         </div>
       </div>
@@ -44,7 +46,7 @@ export default async function EventPage({
         <Card className="mt-6 mb-8">
           <CardHeader>
             <CardTitle className="text-2xl">{event.title}</CardTitle>
-            <CardDescription>Event ID: {event.id}</CardDescription>
+            <CardDescription>ID Evento: {event.id}</CardDescription>
           </CardHeader>
           <CardContent>{event.description}</CardContent>
         </Card>
@@ -56,7 +58,7 @@ export default async function EventPage({
           <Card className="mt-6 mb-8">
             <CardHeader>
               <CardTitle className="text-xl">
-                Questions ({questions.length})
+                Domande ({questions.length})
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -65,7 +67,7 @@ export default async function EventPage({
               ) : (
                 <div className="bg-yellow-50 p-6 border border-yellow-200 rounded-lg">
                   <p className="text-yellow-700">
-                    No questions available for this event yet.
+                    Nessuna domanda disponibile per questo evento ancora.
                   </p>
                 </div>
               )}
