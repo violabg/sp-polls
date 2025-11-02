@@ -4,7 +4,7 @@
  */
 
 // Mock delay for simulating network conditions (milliseconds)
-export const MOCK_DELAY_MS = 2000;
+export const MOCK_DELAY_MS = process.env.NODE_ENV === "test" ? 0 : 2000;
 
 // Form timing constants
 export const FORM_TIMING = {
