@@ -20,8 +20,8 @@ Principali pagine / route
 
 - /login — login social (separato o modal)
 - /admin — dashboard admin (protezione: role=admin)
-  - /admin/events — lista eventi, crea/modifica/cancella
-  - /admin/events/[id] — dettaglio evento: domande generate, risposte utenti (filtri)
+  - /events — lista eventi, crea/modifica/cancella
+  - /events/[id] — dettaglio evento: domande generate, risposte utenti (filtri)
 - /e/[eventId] — pagina pubblica evento (accesso via QR o link)
   - mostra titolo/descrizione e lista domande
   - richiede login social prima di poter rispondere
