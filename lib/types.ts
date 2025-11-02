@@ -15,7 +15,6 @@ export interface Event {
   qr_code_url: string;
   created_by: string;
   created_at: string;
-  status: "draft" | "published" | "archived";
 }
 
 // Choice for questions
@@ -46,7 +45,7 @@ export interface Answer {
   question_id: string;
   user_id: string;
   selected_choice: string;
-  is_correct: boolean;
+  is_correct: boolean | null;
   created_at: string;
 }
 
@@ -112,4 +111,22 @@ export interface EventAggregatesResponse {
   total_respondents: number;
   questions: QuestionStats[];
   generated_at: string;
+}
+
+// User aggregates for admin view
+export interface UserAnswer {
+  question_id: string;
+  question_text: string;
+  selected_choice: string;
+  is_correct: boolean | null;
+}
+
+export interface UserAggregate {
+  user: User;
+  answers: UserAnswer[];
+}
+
+export interface EventUserAggregatesResponse {
+  event: Event;
+  aggregates: UserAggregate[];
 }

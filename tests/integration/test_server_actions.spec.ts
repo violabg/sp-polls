@@ -66,9 +66,11 @@ describe("Server Actions Integration Tests", () => {
       const result = await updateEvent(formData);
 
       expect(result.success).toBe(true);
-      expect(result.data?.id).toBe("test-event-123");
-      expect(result.data?.title).toBe("Updated Event");
-      expect(result.data?.message).toBe("Evento aggiornato con successo");
+      if (result.success) {
+        expect(result.data?.id).toBe("test-event-123");
+        expect(result.data?.title).toBe("Updated Event");
+        expect(result.data?.message).toBe("Evento aggiornato con successo");
+      }
     });
 
     it("should require event ID", async () => {
@@ -79,7 +81,9 @@ describe("Server Actions Integration Tests", () => {
       const result = await updateEvent(formData);
 
       expect(result.success).toBe(false);
-      expect(result.error).toBe("ID evento mancante");
+      if (!result.success) {
+        expect(result.error).toBe("ID evento mancante");
+      }
     });
   });
 
@@ -93,10 +97,12 @@ describe("Server Actions Integration Tests", () => {
       const result = await submitAnswer(formData);
 
       expect(result.success).toBe(true);
-      expect(result.data?.answerId).toBeDefined();
-      expect(result.data?.questionId).toBe("q-123");
-      expect(typeof result.data?.isCorrect).toBe("boolean");
-      expect(result.data?.message).toBe("Risposta inviata con successo");
+      if (result.success) {
+        expect(result.data?.answerId).toBeDefined();
+        expect(result.data?.questionId).toBe("q-123");
+        expect(typeof result.data?.isCorrect).toBe("boolean");
+        expect(result.data?.message).toBe("Risposta inviata con successo");
+      }
     });
 
     it("should require all fields", async () => {
@@ -107,7 +113,9 @@ describe("Server Actions Integration Tests", () => {
       const result = await submitAnswer(formData);
 
       expect(result.success).toBe(false);
-      expect(result.error).toBe("Campi obbligatori mancanti");
+      if (!result.success) {
+        expect(result.error).toBe("Campi obbligatori mancanti");
+      }
     });
   });
 
@@ -119,9 +127,11 @@ describe("Server Actions Integration Tests", () => {
       const result = await generateQuestions(formData);
 
       expect(result.success).toBe(true);
-      expect(result.data?.eventId).toBe("event-123");
-      expect(result.data?.questionsGenerated).toBe(4);
-      expect(result.data?.message).toContain("domande generate");
+      if (result.success) {
+        expect(result.data?.eventId).toBe("event-123");
+        expect(result.data?.questionsGenerated).toBe(4);
+        expect(result.data?.message).toContain("domande generate");
+      }
     });
 
     it("should require event ID", async () => {
@@ -131,7 +141,9 @@ describe("Server Actions Integration Tests", () => {
       const result = await generateQuestions(formData);
 
       expect(result.success).toBe(false);
-      expect(result.error).toBe("ID evento mancante");
+      if (!result.success) {
+        expect(result.error).toBe("ID evento mancante");
+      }
     });
   });
 

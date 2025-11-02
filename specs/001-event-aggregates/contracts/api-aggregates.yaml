@@ -1,0 +1,112 @@
+openapi: 3.0.3
+info:
+  title: Event Aggregates API
+  version: 1.0.0
+  description: API for retrieving event answer aggregates
+
+paths:
+  /api/events/{eventId}/aggregates:
+    get:
+      summary: Get event answer aggregates
+      description: Retrieve all answers for an event's questions, grouped by user
+      parameters:
+        - name: eventId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The event ID
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  event:
+                    $ref: "#/components/schemas/Event"
+                  aggregates:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/UserAggregate"
+        "404":
+          description: Event not found
+        "403":
+          description: Access denied
+
+components:
+  schemas:
+    Event:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        description:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        questions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Question"
+
+    Question:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        text:
+          type: string
+        type:
+          type: string
+          enum: [multiple_choice, text, rating]
+        options:
+          type: array
+          items:
+            type: string
+
+    UserAggregate:
+      type: object
+      properties:
+        user:
+          $ref: "#/components/schemas/User"
+        answers:
+          type: array
+          items:
+            $ref: "#/components/schemas/Answer"
+
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        email:
+          type: string
+
+    Answer:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        question_id:
+          type: string
+          format: uuid
+        response:
+          type: string
+        is_correct:
+          type: boolean
+          nullable: true
+        created_at:
+          type: string
+          format: date-time

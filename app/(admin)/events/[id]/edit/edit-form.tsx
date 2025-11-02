@@ -10,23 +10,14 @@ import {
 } from "@/components/ui/field";
 import { FormSpinner } from "@/components/ui/form-spinner";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import type { Event } from "@/lib/types";
 import { italianLabels } from "@/lib/types/italian";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useActionState, useTransition } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { updateEventAction } from "./actions";
-
-const statusOptions = ["draft", "published", "archived"] as const;
 
 const eventSchema = z.object({
   title: z
@@ -34,7 +25,6 @@ const eventSchema = z.object({
     .min(1, italianLabels.required_field)
     .max(255, italianLabels.max_length(255)),
   description: z.string().max(1000, italianLabels.max_length(1000)).optional(),
-  status: z.enum(statusOptions, { message: italianLabels.invalid_format }),
 });
 
 type EventFormData = z.infer<typeof eventSchema>;
@@ -59,7 +49,6 @@ export function EditForm({ event }: EditFormProps) {
   const [isPending, startTransition] = useTransition();
 
   const {
-    control,
     register,
     handleSubmit,
     formState: { errors },
@@ -68,7 +57,6 @@ export function EditForm({ event }: EditFormProps) {
     defaultValues: {
       title: event.title,
       description: event.description,
-      status: event.status as (typeof statusOptions)[number],
     },
   });
 
@@ -77,7 +65,6 @@ export function EditForm({ event }: EditFormProps) {
     formData.append("eventId", event.id);
     formData.append("title", data.title);
     formData.append("description", data.description ?? "");
-    formData.append("status", data.status);
     startTransition(() => formAction(formData));
   };
 
@@ -113,39 +100,6 @@ export function EditForm({ event }: EditFormProps) {
             {errors.description && (
               <FieldError>{errors.description.message}</FieldError>
             )}
-          </Field>
-          <Field data-invalid={!!errors.status}>
-            <FieldLabel>Stato</FieldLabel>
-            <Controller
-              name="status"
-              control={control}
-              render={({ field }) => (
-                <Select
-                  value={field.value}
-                  onValueChange={(value) => !isPending && field.onChange(value)}
-                  disabled={isPending}
-                >
-                  <SelectTrigger
-                    aria-invalid={!!errors.status}
-                    disabled={isPending}
-                  >
-                    <SelectValue placeholder="Seleziona lo stato" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {statusOptions.map((option) => (
-                      <SelectItem key={option} value={option}>
-                        {option === "draft"
-                          ? "Bozza"
-                          : option === "published"
-                          ? "Pubblicato"
-                          : "Archiviato"}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              )}
-            />
-            {errors.status && <FieldError>{errors.status.message}</FieldError>}
           </Field>
           <input type="hidden" name="eventId" value={event.id} />
           <Button type="submit" disabled={isPending}>

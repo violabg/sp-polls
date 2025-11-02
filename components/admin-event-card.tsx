@@ -1,4 +1,3 @@
-import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
@@ -40,18 +39,6 @@ export default function AdminEventCard({ event }: { event: EventType }) {
         <CardContent>
           <p className="mt-2 text-gray-600">{event?.description}</p>
           <div className="gap-4 grid grid-cols-2 mt-4 text-sm">
-            <div className="flex items-center gap-2">
-              <span className="font-semibold text-gray-700">Stato:</span>
-              <Badge
-                className={`${
-                  event?.status === "published"
-                    ? "bg-green-100 text-green-800"
-                    : "bg-yellow-100 text-yellow-800"
-                }`}
-              >
-                {statusLabel}
-              </Badge>
-            </div>
             <div>
               <span className="font-semibold text-gray-700">QR Code:</span>
               <code className="bg-gray-100 ml-2 px-2 py-1 rounded text-gray-700">
