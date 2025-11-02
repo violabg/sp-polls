@@ -18,34 +18,40 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { createEvent } from "@/lib/actions/create-event";
-import { useFormAction } from "@/lib/hooks/use-form-action";
+import { italianLabels } from "@/lib/types/italian";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useActionState, useTransition } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
+import { createEventAction } from "./actions";
 
 const statusOptions = ["draft", "published", "archived"] as const;
 
 const eventSchema = z.object({
   title: z
     .string()
-    .min(1, "Title is required")
-    .max(255, "Title must be less than 255 characters"),
-  description: z
-    .string()
-    .max(1000, "Description must be less than 1000 characters")
-    .optional(),
-  status: z.enum(statusOptions),
+    .min(1, italianLabels.required_field)
+    .max(255, italianLabels.max_length(255)),
+  description: z.string().max(1000, italianLabels.max_length(1000)).optional(),
+  status: z.enum(statusOptions, { message: italianLabels.invalid_format }),
 });
 
 type EventFormData = z.infer<typeof eventSchema>;
 
+interface ServerState {
+  success?: boolean;
+  error?: string;
+}
+
 export default function NewEventPage() {
-  const router = useRouter();
-  const { state, formAction, isPending } = useFormAction(createEvent);
-  const typedState = state as Record<string, unknown> | undefined;
+  const [state, formAction] = useActionState<ServerState, FormData>(
+    async (_prevState: ServerState, formData: FormData) => {
+      return createEventAction(formData) as Promise<ServerState>;
+    },
+    {}
+  );
+
+  const [isPending, startTransition] = useTransition();
 
   const {
     control,
@@ -62,29 +68,25 @@ export default function NewEventPage() {
   });
 
   // Handle successful form submission
-  useEffect(() => {
-    if (typedState?.success) {
-      router.push("/events");
-    }
-  }, [typedState?.success, router]);
+  // Note: redirect will be handled by server action
+  // This is just for reference if needed for client-side logic
 
-  const onSubmit = async (data: EventFormData) => {
+  const onSubmit = (data: EventFormData) => {
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("description", data.description ?? "");
     formData.append("status", data.status);
 
-    // Call formAction directly - it handles its own pending state
-    await formAction(formData);
+    startTransition(() => formAction(formData));
   };
 
   return (
     <div className="mx-auto p-4 container">
       <h1 className="mb-4 font-bold text-2xl">Crea Nuovo Evento</h1>
       <form onSubmit={handleSubmit(onSubmit)} noValidate aria-busy={isPending}>
-        {typedState?.error ? (
+        {state?.error ? (
           <div className="bg-red-100 mb-4 p-3 border border-red-200 rounded text-red-700 text-sm">
-            {String(typedState.error)}
+            {String(state.error)}
           </div>
         ) : null}
         <FieldSet disabled={isPending}>
