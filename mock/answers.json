@@ -6,5 +6,37 @@
     "selected_choice": "c2",
     "is_correct": true,
     "created_at": "2025-10-31T09:10:00Z"
+  },
+  {
+    "id": "ans-1762095768006-2hobvt1n7",
+    "question_id": "q-001",
+    "user_id": "user-001",
+    "selected_choice": "c2",
+    "is_correct": true,
+    "created_at": "2025-11-02T15:02:48.006Z"
+  },
+  {
+    "id": "ans-1762095768006-unt2okas0",
+    "question_id": "q-002",
+    "user_id": "user-001",
+    "selected_choice": "c4",
+    "is_correct": false,
+    "created_at": "2025-11-02T15:02:48.006Z"
+  },
+  {
+    "id": "ans-1762095830610-eq3ll83nj",
+    "question_id": "q-001",
+    "user_id": "user-001",
+    "selected_choice": "c2",
+    "is_correct": true,
+    "created_at": "2025-11-02T15:03:50.610Z"
+  },
+  {
+    "id": "ans-1762095830610-spoy2s3bv",
+    "question_id": "q-002",
+    "user_id": "user-001",
+    "selected_choice": "c4",
+    "is_correct": false,
+    "created_at": "2025-11-02T15:03:50.610Z"
   }
 ]

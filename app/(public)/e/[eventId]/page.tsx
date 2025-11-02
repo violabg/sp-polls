@@ -63,7 +63,11 @@ export default async function EventPage({
             </CardHeader>
             <CardContent>
               {questions.length > 0 ? (
-                <AnswersForm questions={questions} userId={user.id} />
+                <AnswersForm
+                  questions={questions}
+                  userId={user.id}
+                  eventId={eventId}
+                />
               ) : (
                 <div className="bg-yellow-50 p-6 border border-yellow-200 rounded-lg">
                   <p className="text-yellow-700">
