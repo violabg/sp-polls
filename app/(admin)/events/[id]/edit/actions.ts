@@ -14,8 +14,6 @@ interface UpdateEventOutput {
   message: string;
 }
 
-const statusOptions = ["draft", "published", "archived"] as const;
-
 const updateEventSchema = z.object({
   title: z
     .string()
@@ -26,7 +24,6 @@ const updateEventSchema = z.object({
     .max(1000, italianLabels.max_length(1000))
     .optional()
     .default(""),
-  status: z.enum(statusOptions, { message: italianLabels.invalid_format }),
 });
 
 /**
@@ -42,7 +39,6 @@ export async function updateEventAction(
     const eventId = formData.get("eventId") as string;
     const title = formData.get("title") as string;
     const description = formData.get("description") as string;
-    const status = formData.get("status") as string;
 
     // Validate event ID
     if (!eventId) {
@@ -56,7 +52,6 @@ export async function updateEventAction(
     const validationResult = updateEventSchema.safeParse({
       title,
       description,
-      status,
     });
 
     if (!validationResult.success) {
@@ -95,10 +90,6 @@ export async function updateEventAction(
       ...events[eventIndex],
       title: validationResult.data.title,
       description: validationResult.data.description,
-      status: validationResult.data.status as
-        | "draft"
-        | "published"
-        | "archived",
     };
 
     // Write back to mock file

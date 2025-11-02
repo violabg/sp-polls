@@ -28,7 +28,7 @@ test.describe("Form Submission and Loading States (US3)", () => {
   });
 
   test("Event edit form accepts input and is submittable", async ({ page }) => {
-    await page.goto("http://localhost:3000/events/1/edit");
+    await page.goto("http://localhost:3000/events/event-001/edit");
 
     // Page should load
     await expect(page.locator("h1")).toContainText("Modifica Evento");
@@ -39,7 +39,7 @@ test.describe("Form Submission and Loading States (US3)", () => {
 
     // Get submit button
     const submitButton = page.locator('button[type="submit"]');
-    await expect(submitButton).toContainText("Salva Evento");
+    await expect(submitButton).toContainText("Salva");
 
     // Submit should be clickable
     await expect(submitButton).not.toBeDisabled();

@@ -1,11 +1,10 @@
 [
   {
     "id": "event-001",
-    "title": "Spindox Tech Meetup - AI Q&A",
-    "description": "Learn about Spindox and participate in a short Q&A.",
+    "title": "Updated Event",
+    "description": "Updated description",
     "qr_code_url": "/e/event-001?qr=1",
     "created_by": "user-admin-1",
-    "status": "published",
     "created_at": "2025-10-31T09:00:00Z"
   },
   {
@@ -14,7 +13,6 @@
     "description": "Join us at Codemotion Milano for tech talks and networking.",
     "qr_code_url": "/e/event-002?qr=1",
     "created_by": "user-admin-1",
-    "status": "published",
     "created_at": "2025-10-31T09:00:00Z"
   },
   {
@@ -23,7 +21,6 @@
     "description": "tewst",
     "qr_code_url": "",
     "created_by": "user-admin-1",
-    "status": "draft",
     "created_at": "2025-11-02T13:55:19.265Z"
   }
 ]

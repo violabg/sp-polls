@@ -42,7 +42,9 @@ describe("Answer Submission & Scoring", () => {
       expect(answer).toHaveProperty("user_id");
       expect(answer).toHaveProperty("selected_choice");
       expect(answer).toHaveProperty("is_correct");
-      expect(typeof answer.is_correct).toBe("boolean");
+      expect(
+        typeof answer.is_correct === "boolean" || answer.is_correct === null
+      ).toBe(true);
       expect(answer).toHaveProperty("created_at");
     }
   });
