@@ -14,8 +14,6 @@ interface CreateEventOutput {
   message: string;
 }
 
-const statusOptions = ["draft", "published", "archived"] as const;
-
 const createEventSchema = z.object({
   title: z
     .string()
@@ -26,7 +24,6 @@ const createEventSchema = z.object({
     .max(1000, italianLabels.max_length(1000))
     .optional()
     .default(""),
-  status: z.enum(statusOptions, { message: italianLabels.invalid_format }),
 });
 
 /**
@@ -82,10 +79,6 @@ export async function createEventAction(
       description: validationResult.data.description,
       qr_code_url: ``,
       created_by: "user-admin-1",
-      status: validationResult.data.status as
-        | "draft"
-        | "published"
-        | "archived",
       created_at: new Date().toISOString(),
     };
 
